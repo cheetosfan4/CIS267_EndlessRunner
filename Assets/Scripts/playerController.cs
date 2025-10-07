@@ -1,24 +1,29 @@
 using System;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class playerController : MonoBehaviour {
-    Rigidbody2D rb;
-    private float inputHorizontal;
     public float moveSpeed;
     public float jumpForce;
+    public float wallJumpShootDuration;
+
+    private Rigidbody2D rb;
+    private GUIHandler menu;
+    private float inputHorizontal;
     private bool grounded = false;
     private bool leftWalled = false;
     private bool rightWalled = false;
     private bool wallJump = false;
-    public float wallJumpShootDuration;
     private float wallJumpTimer = 0f;
+
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        menu = GameObject.FindWithTag("GUI").GetComponent<GUIHandler>();
     }
 
     void Update() {
@@ -118,7 +123,7 @@ public class playerController : MonoBehaviour {
             }
         }
         if (collision.gameObject.CompareTag("Injure")) {
-            Debug.Log("DEATH");
+            menu.uponDeath();
         }
     }
 
@@ -139,7 +144,7 @@ public class playerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("BottomBorder")) {
-            Debug.Log("FELL");
+            menu.uponDeath();
         }
     }
 }

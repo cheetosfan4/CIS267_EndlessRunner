@@ -12,6 +12,7 @@ TagManager:
   - RightBorder
   - TopBorder
   - BottomBorder
+  - GUI
   layers:
   - Default
   - TransparentFX
