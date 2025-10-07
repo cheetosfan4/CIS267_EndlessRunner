@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class objectMover : MonoBehaviour {
-    private bool moving = false;
+    private bool moving = true;
+    private bool started = false;
     public float motionSpeed;
     public GameObject player;
     private Rigidbody2D rb;
@@ -11,16 +12,26 @@ public class objectMover : MonoBehaviour {
     }
 
     void Update() {
-        if (moving) {
-            transform.Translate(Vector2.left * motionSpeed * Time.deltaTime);
+        pauseAndResume();
+        if (started && moving) {
+            transform.Translate(Vector2.right * motionSpeed * Time.deltaTime);
         }
         else {
             checkPlayerPosition();
         }
     }
 
+    //this is so the game doesn't truly start until the player begins to move
     private void checkPlayerPosition() {
         if(rb.position.x != -9) {
+            started = true;
+        }
+    }
+    private void pauseAndResume() {
+        if(Input.GetKeyDown(KeyCode.T) && moving) {
+            moving = false;
+        }
+        else if(Input.GetKeyDown(KeyCode.T) && !moving) {
             moving = true;
         }
     }
