@@ -3,7 +3,7 @@ using UnityEngine;
 public class textureTiler : MonoBehaviour {
     private float height;
     private float width;
-    public float scaleMultiplier;
+    //public float scaleMultiplier;
     private SpriteRenderer display;
     private BoxCollider2D boxCollider;
 
@@ -11,8 +11,8 @@ public class textureTiler : MonoBehaviour {
         display = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
-        float width = (this.transform.localScale.x * scaleMultiplier);
-        float height = (this.transform.localScale.y * scaleMultiplier);
+        float width = (this.transform.localScale.x /** scaleMultiplier*/);
+        float height = (this.transform.localScale.y /** scaleMultiplier*/);
 
         //resets transformation on base object
         //then, scales the sprite renderer size and collider size based on the base object's size

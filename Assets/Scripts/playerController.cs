@@ -45,6 +45,8 @@ public class playerController : MonoBehaviour {
         }
         wallJump = false;
 
+        //this timer is so the default movement doesn't interfere with the wall jump
+        //without it, the player's movement is reset to 0 on the next frame
         if(wallJumpTimer > 0f) {
             wallJumpTimer -= Time.deltaTime;
         }
@@ -115,6 +117,9 @@ public class playerController : MonoBehaviour {
                 }
             }
         }
+        if (collision.gameObject.CompareTag("Injure")) {
+            Debug.Log("DEATH");
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
@@ -129,6 +134,12 @@ public class playerController : MonoBehaviour {
             grounded = false;
             leftWalled = false;
             rightWalled = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("BottomBorder")) {
+            Debug.Log("FELL");
         }
     }
 }

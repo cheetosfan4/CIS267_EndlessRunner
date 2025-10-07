@@ -7,6 +7,11 @@ TagManager:
   - Ground
   - Wall
   - Terrain
+  - Injure
+  - LeftBorder
+  - RightBorder
+  - TopBorder
+  - BottomBorder
   layers:
   - Default
   - TransparentFX
@@ -43,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TrueBackground
+    uniqueID: 4252585921
     locked: 0
   - name: Background
     uniqueID: 2630931621
