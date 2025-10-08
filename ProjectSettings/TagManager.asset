@@ -16,6 +16,7 @@ TagManager:
   - ModuleEnter
   - ModuleExit
   - Module
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -61,6 +62,9 @@ TagManager:
     locked: 0
   - name: Objects
     uniqueID: 65596805
+    locked: 0
+  - name: Enemy
+    uniqueID: 2776438283
     locked: 0
   - name: Player
     uniqueID: 2488853421
