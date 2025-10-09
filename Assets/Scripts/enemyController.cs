@@ -68,7 +68,7 @@ public class enemyController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player")) {
             foreach (ContactPoint2D contact in collision.contacts) {
                 //this checks to make sure that the player jumps on top of the enemy
-                if (contact.normal.y < -0.9f) {
+                if (contact.normal.y < -0.5f) {
                     Destroy(gameObject);
                 }
             }

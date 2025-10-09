@@ -49,13 +49,11 @@ public class playerController : MonoBehaviour {
         if (wallJump && rightWalled) {
             rb.linearVelocity = new Vector2(moveSpeed * 1.2f, jumpForce);
             flipPlayer(moveSpeed);
-            Debug.Log("right wall jump timer started");
             wallJumpTimer = wallJumpShootDuration;
         }
         else if (wallJump && leftWalled) {
             rb.linearVelocity = new Vector2(-moveSpeed * 1.2f, jumpForce);
             flipPlayer(-moveSpeed);
-            Debug.Log("left wall jump timer started");
             wallJumpTimer = wallJumpShootDuration;
         }
         wallJump = false;
@@ -87,7 +85,6 @@ public class playerController : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !grounded && (rightWalled || leftWalled)) {
             wallJump = true;
-            Debug.Log("wall jump activated");
         }
     }
 
@@ -123,7 +120,7 @@ public class playerController : MonoBehaviour {
             bool dead = true;
             //checks each point to make sure that the player jumped on top of the enemy
             foreach (ContactPoint2D contact in collision.contacts) {
-                if (contact.normal.y > 0.8f) {
+                if (contact.normal.y > 0.5f) {
                     dead = false;
                     break;
                 }
