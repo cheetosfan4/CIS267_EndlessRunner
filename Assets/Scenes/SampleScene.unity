@@ -900,6 +900,7 @@ MonoBehaviour:
   moveSpeed: 16
   jumpForce: 30
   wallJumpShootDuration: 0.2
+  hitPoints: 1
 --- !u!1 &841242081
 GameObject:
   m_ObjectHideFlags: 0

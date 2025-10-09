@@ -6,11 +6,13 @@ using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class playerController : MonoBehaviour {
     public float moveSpeed;
     public float jumpForce;
     public float wallJumpShootDuration;
+    public int hitPoints;
 
     private Rigidbody2D rb;
     private GameObject GUIObject;
@@ -21,6 +23,9 @@ public class playerController : MonoBehaviour {
     private bool rightWalled = false;
     private bool wallJump = false;
     private float wallJumpTimer = 0f;
+    private bool dead = false;
+    private itemData itemGrabbed;
+    private GameObject accessoryToSpawn;
     //these are to store what objects the player collides with, with no repeating objects
     private HashSet<Collider2D> groundsTouching = new HashSet<Collider2D>();
     private HashSet<Collider2D> leftWallsTouching = new HashSet<Collider2D>();
@@ -41,6 +46,7 @@ public class playerController : MonoBehaviour {
     void Update() {
         movePlayer();
         jump();
+        death();
     }
 
     private void movePlayer() {
@@ -88,6 +94,12 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    private void death() {
+        if (dead) {
+            menu.uponDeath();
+            dead = false;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision) {
         if (!collision.gameObject.CompareTag("Injure")) {
             //this loops through each of the points of the object that the player collides with
@@ -113,21 +125,23 @@ public class playerController : MonoBehaviour {
         }
 
         if (collision.gameObject.CompareTag("Injure")) {
-            menu.uponDeath();
+            hitPoints--;
+            dead = hitPoints <= 0;
         }
 
         if (collision.gameObject.CompareTag("Enemy")) {
-            bool dead = true;
+            bool hit = true;
             //checks each point to make sure that the player jumped on top of the enemy
             foreach (ContactPoint2D contact in collision.contacts) {
                 if (contact.normal.y > 0.5f) {
-                    dead = false;
+                    hit = false;
                     menu.updateScore(10);
                     break;
                 }
             }
-            if (dead) {
-                menu.uponDeath();
+            if (hit) {
+                hitPoints--;
+                dead = hitPoints <= 0;
             }
         }
     }
@@ -149,15 +163,25 @@ public class playerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("BottomBorder")) {
             menu.uponDeath();
+            dead = false;
         }
         if (collision.gameObject.CompareTag("Fruit")) {
             Destroy(collision.gameObject);
             menu.updateScore(5);
         }
+        if (collision.gameObject.CompareTag("Item")) {
+            itemGrabbed = collision.gameObject.GetComponent<itemData>();
+            accessoryToSpawn = Instantiate(itemGrabbed.accessory);
+            
+            accessoryToSpawn.transform.position = new Vector2(rb.position.x, rb.position.y);
+            accessoryToSpawn.transform.SetParent(this.gameObject.transform);
+            Destroy(collision.gameObject);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("LeftBorder") && rb.position.x < collision.gameObject.transform.position.x) {
             menu.uponDeath();
+            dead = false;
         }
     }
 }

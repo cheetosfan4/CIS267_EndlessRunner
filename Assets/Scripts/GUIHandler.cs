@@ -31,11 +31,13 @@ public class GUIHandler : MonoBehaviour {
             scoreCounter.SetActive(true);
             SceneManager.LoadScene("SampleScene");
             sceneLoaded = true;
+            Debug.Log("scene initially loaded");
         }
         else if (!died) {
             menuButtons.SetActive(false);
             Time.timeScale = 1;
             gamePaused = false;
+            Debug.Log("game unpaused");
         }
         else {
             menuButtons.SetActive(false);
@@ -43,6 +45,7 @@ public class GUIHandler : MonoBehaviour {
             Time.timeScale = 1;
             gamePaused = false;
             died = false;
+            Debug.Log("game reloaded after death");
         }
         updateScore(0);
     }
