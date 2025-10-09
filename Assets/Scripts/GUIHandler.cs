@@ -12,6 +12,9 @@ public class GUIHandler : MonoBehaviour {
     public GameObject scoreCounter;
     public GameObject mushroomGUI;
     public GameObject kneepadGUI;
+    public GameObject hourglassGUI;
+    public float mushroomTimer = 0;
+    private TextMeshProUGUI hourglassText;
     private TextMeshProUGUI kneepadText;
     private TextMeshProUGUI mushroomText;
     private TextMeshProUGUI scoreText;
@@ -20,15 +23,19 @@ public class GUIHandler : MonoBehaviour {
     private bool died = false;
     private int playerScore = 0;
     private int kneepadCounter = 0;
-    public float mushroomTimer = 0;
+    public bool cameraMoving = true;
+    public float hourglassTimer = 0;
+
     void Start() {
         DontDestroyOnLoad(this.gameObject);
         scoreText = scoreCounter.GetComponentInChildren<TextMeshProUGUI>();
         mushroomText = mushroomGUI.GetComponentInChildren<TextMeshProUGUI>();
         kneepadText = kneepadGUI.GetComponentInChildren<TextMeshProUGUI>();
+        hourglassText = hourglassGUI.GetComponentInChildren<TextMeshProUGUI>();
         scoreCounter.SetActive(false);
         mushroomGUI.SetActive(false);
         kneepadGUI.SetActive(false);
+        hourglassGUI.SetActive(false);
     }
 
     void Update() {
@@ -41,28 +48,31 @@ public class GUIHandler : MonoBehaviour {
             menuButtons.SetActive(false);
             mushroomGUI.SetActive(false);
             kneepadGUI.SetActive(false);
+            hourglassGUI.SetActive(false);
             scoreCounter.SetActive(true);
             SceneManager.LoadScene("SampleScene");
             sceneLoaded = true;
-            Debug.Log("scene initially loaded");
         }
         else if (!died) {
             menuButtons.SetActive(false);
             Time.timeScale = 1;
             gamePaused = false;
-            Debug.Log("game unpaused");
+            Debug.Log("Test");
         }
         else {
             menuButtons.SetActive(false);
             mushroomGUI.SetActive(false);
             kneepadGUI.SetActive(false);
+            hourglassGUI.SetActive(false);
             SceneManager.LoadScene("SampleScene");
             Time.timeScale = 1;
             gamePaused = false;
             died = false;
-            Debug.Log("game reloaded after death");
         }
         updateScore(0);
+        kneepadCounter = 0;
+        cameraMoving = true;
+        hourglassTimer = 0;
     }
 
     public void exitGame() {
@@ -115,7 +125,8 @@ public class GUIHandler : MonoBehaviour {
     public void updateMushroomTimer() {
         if (mushroomTimer > 0) {
             mushroomTimer -= Time.deltaTime;
-            mushroomText.text = ": " + ((int)(mushroomTimer)).ToString();
+            //math & rounding so it only shows two decimal places
+            mushroomText.text = ": " + (Mathf.Round(mushroomTimer * 100)/100).ToString();
         }
         else {
             mushroomGUI.SetActive(false);
@@ -125,10 +136,29 @@ public class GUIHandler : MonoBehaviour {
         kneepadCounter += x;
         if (kneepadCounter > 0) {
             kneepadGUI.SetActive(true);
-            kneepadText.text = "X " + kneepadCounter.ToString();
+            kneepadText.text = "X " + (Mathf.Round(hourglassTimer * 100) / 100).ToString();
         }
         else {
             kneepadGUI.SetActive(false);
         }
+    }
+
+    public void updateHourglassTimer(int x) {
+        hourglassTimer += x;
+        hourglassGUI.SetActive(true);
+        hourglassText.text = ": " + hourglassTimer.ToString();
+    }
+
+    public void updateHourglassTimer() {
+        hourglassTimer -= Time.deltaTime;
+        if (hourglassTimer <= 0) {
+            hourglassGUI.SetActive(false);
+            cameraMoving = true;
+        }
+        else {
+            hourglassGUI.SetActive(true);
+        }
+
+        hourglassText.text = ": " + (Mathf.Round(hourglassTimer * 100) / 100).ToString();
     }
 }
