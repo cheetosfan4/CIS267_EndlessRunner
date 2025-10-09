@@ -173,8 +173,10 @@ public class playerController : MonoBehaviour {
             itemGrabbed = collision.gameObject.GetComponent<itemData>();
             accessoryToSpawn = Instantiate(itemGrabbed.accessory);
             
-            accessoryToSpawn.transform.position = new Vector2(rb.position.x, rb.position.y);
+            
             accessoryToSpawn.transform.SetParent(this.gameObject.transform);
+            accessoryToSpawn.transform.position = new Vector2(rb.position.x, rb.position.y);
+            accessoryToSpawn.transform.eulerAngles = new Vector3(rb.transform.eulerAngles.x, rb.transform.eulerAngles.y, rb.transform.eulerAngles.z);
             Destroy(collision.gameObject);
         }
     }
