@@ -233,6 +233,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4121141404141065966, guid: fe65d6d27e25bfd43b24ef0b3399884e, type: 3}
   m_PrefabInstance: {fileID: 769654456}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &260216699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260216700}
+  - component: {fileID: 260216701}
+  m_Layer: 0
+  m_Name: GUI Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260216700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260216699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &260216701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260216699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edfd78c521c6304d89159d42a042a03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::instantiateGUI
+  GUI: {fileID: 6227959506447569744, guid: db7a307464187054a903a44cbcea9e36, type: 3}
 --- !u!1001 &291855711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1979,3 +2024,4 @@ SceneRoots:
   - {fileID: 1379947939}
   - {fileID: 767005966}
   - {fileID: 4146088244555320641}
+  - {fileID: 260216700}

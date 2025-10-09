@@ -8,12 +8,6 @@ public class instantiateModule : MonoBehaviour {
     private GameObject moduleToSpawn;
     private BoxCollider2D modulePos;
 
-    void Start() {
-    }
-
-    void Update() {
-    }
-
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("ModuleExit")) {
             //picks a random value based on the array's size to determine which module to spawn

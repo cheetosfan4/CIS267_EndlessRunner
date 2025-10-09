@@ -5,8 +5,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class GUIHandler : MonoBehaviour {
+    //code for singleton
+    public static GUIHandler instance { get; private set; }
+    private void Awake() {
+        if (instance != null && instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            instance = this;
+        }
+        GUIHandler.instance.scoreCounter.SetActive(false);
+    }
 
-    //public GameObject menu;
     public GameObject enterButton;
     public GameObject menuButtons;
     public GameObject scoreCounter;
@@ -32,7 +42,6 @@ public class GUIHandler : MonoBehaviour {
         mushroomText = mushroomGUI.GetComponentInChildren<TextMeshProUGUI>();
         kneepadText = kneepadGUI.GetComponentInChildren<TextMeshProUGUI>();
         hourglassText = hourglassGUI.GetComponentInChildren<TextMeshProUGUI>();
-        scoreCounter.SetActive(false);
         mushroomGUI.SetActive(false);
         kneepadGUI.SetActive(false);
         hourglassGUI.SetActive(false);
@@ -42,8 +51,14 @@ public class GUIHandler : MonoBehaviour {
         showPauseMenu();
     }
 
+    public void debugMode() {
+        GUIHandler.instance.menuButtons.SetActive(false);
+        GUIHandler.instance.scoreCounter.SetActive(true);
+        sceneLoaded = true;
+    }
+
     public void enterGame() {
-        //loads game
+        //loads game from main menu
         if(!sceneLoaded) {
             menuButtons.SetActive(false);
             mushroomGUI.SetActive(false);
@@ -52,13 +67,18 @@ public class GUIHandler : MonoBehaviour {
             scoreCounter.SetActive(true);
             SceneManager.LoadScene("SampleScene");
             sceneLoaded = true;
+            updateScore(0);
+            kneepadCounter = 0;
+            cameraMoving = true;
+            hourglassTimer = 0;
         }
+        //unpauses game when clicking resume
         else if (!died) {
             menuButtons.SetActive(false);
             Time.timeScale = 1;
             gamePaused = false;
-            Debug.Log("Test");
         }
+        //loads game when clicking retry
         else {
             menuButtons.SetActive(false);
             mushroomGUI.SetActive(false);
@@ -68,11 +88,11 @@ public class GUIHandler : MonoBehaviour {
             Time.timeScale = 1;
             gamePaused = false;
             died = false;
+            updateScore(0);
+            kneepadCounter = 0;
+            cameraMoving = true;
+            hourglassTimer = 0;
         }
-        updateScore(0);
-        kneepadCounter = 0;
-        cameraMoving = true;
-        hourglassTimer = 0;
     }
 
     public void exitGame() {

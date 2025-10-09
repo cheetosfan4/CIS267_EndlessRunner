@@ -15,8 +15,6 @@ public class playerController : MonoBehaviour {
     public int hitPoints;
 
     private Rigidbody2D rb;
-    private GameObject GUIObject;
-    private GUIHandler menu;
     private float inputHorizontal;
     private bool grounded = false;
     private bool leftWalled = false;
@@ -34,13 +32,6 @@ public class playerController : MonoBehaviour {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        GUIObject = GameObject.FindWithTag("GUI");
-        if (GUIObject != null) {
-            menu = GUIObject.GetComponent<GUIHandler>();
-        }
-        else {
-            Debug.Log("gui missing");
-        }
     }
 
     void Update() {
@@ -96,7 +87,7 @@ public class playerController : MonoBehaviour {
 
     private void death() {
         if (dead) {
-            menu.uponDeath();
+            GUIHandler.instance.uponDeath();
             dead = false;
         }
     }
@@ -135,7 +126,7 @@ public class playerController : MonoBehaviour {
             foreach (ContactPoint2D contact in collision.contacts) {
                 if (contact.normal.y > 0.5f) {
                     hit = false;
-                    menu.updateScore(10);
+                    GUIHandler.instance.updateScore(10);
                     break;
                 }
             }
@@ -162,12 +153,12 @@ public class playerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("BottomBorder")) {
-            menu.uponDeath();
+            GUIHandler.instance.uponDeath();
             dead = false;
         }
         if (collision.gameObject.CompareTag("Fruit")) {
             Destroy(collision.gameObject);
-            menu.updateScore(5);
+            GUIHandler.instance.updateScore(5);
         }
         if (collision.gameObject.CompareTag("Item")) {
             itemGrabbed = collision.gameObject.GetComponent<itemData>();
@@ -182,7 +173,7 @@ public class playerController : MonoBehaviour {
     }
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("LeftBorder") && rb.position.x < collision.gameObject.transform.position.x) {
-            menu.uponDeath();
+            GUIHandler.instance.uponDeath();
             dead = false;
         }
     }
