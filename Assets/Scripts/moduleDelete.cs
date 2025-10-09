@@ -14,8 +14,11 @@ public class moduleDelete : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Module") && inside) {
             Destroy(collision.gameObject);
-            GUIHandler.instance.updateScore(50);
+            GUIHandler.instance.updateScore(100);
             inside = false;
+        }
+        if (collision.gameObject.CompareTag("House")) {
+            Destroy(collision.gameObject);
         }
     }
 }

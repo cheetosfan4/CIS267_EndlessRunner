@@ -19,6 +19,7 @@ TagManager:
   - Enemy
   - Fruit
   - Item
+  - House
   layers:
   - Default
   - TransparentFX

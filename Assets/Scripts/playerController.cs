@@ -126,7 +126,7 @@ public class playerController : MonoBehaviour {
             foreach (ContactPoint2D contact in collision.contacts) {
                 if (contact.normal.y > 0.5f) {
                     hit = false;
-                    GUIHandler.instance.updateScore(10);
+                    GUIHandler.instance.updateScore(50);
                     break;
                 }
             }
@@ -163,8 +163,6 @@ public class playerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Item")) {
             itemGrabbed = collision.gameObject.GetComponent<itemData>();
             accessoryToSpawn = Instantiate(itemGrabbed.accessory);
-            
-            
             accessoryToSpawn.transform.SetParent(this.gameObject.transform);
             accessoryToSpawn.transform.position = new Vector2(rb.position.x, rb.position.y);
             accessoryToSpawn.transform.eulerAngles = new Vector3(rb.transform.eulerAngles.x, rb.transform.eulerAngles.y, rb.transform.eulerAngles.z);
