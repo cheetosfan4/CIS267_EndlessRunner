@@ -2,7 +2,6 @@ using UnityEditor;
 using UnityEngine;
 
 public class objectMover : MonoBehaviour {
-    //private bool moving = true;
     private bool started = false;
     public float motionSpeed;
     public GameObject player;
@@ -17,15 +16,16 @@ public class objectMover : MonoBehaviour {
         if (started && GUIHandler.instance.cameraMoving) {
             transform.Translate(Vector2.right * motionSpeed * Time.deltaTime);
         }
-        else {
+        else if (!started) {
             checkPlayerPosition();
         }
     }
 
-    //this is so the game doesn't truly start until the player begins to move
+    //this is so the game doesn't actually start until the player begins to move
     private void checkPlayerPosition() {
         if(rb.position.x != -9) {
             started = true;
+            GUIHandler.instance.setDeletionStatus(true);
         }
     }
 }

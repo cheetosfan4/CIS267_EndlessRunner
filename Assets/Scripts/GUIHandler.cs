@@ -1,3 +1,4 @@
+using System.Data;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class GUIHandler : MonoBehaviour {
     private TextMeshProUGUI kneepadText;
     private TextMeshProUGUI mushroomText;
     private TextMeshProUGUI scoreText;
+    private bool startDeletion = false;
     private bool sceneLoaded = false;
     private bool gamePaused = false;
     private bool died = false;
@@ -71,7 +73,8 @@ public class GUIHandler : MonoBehaviour {
             kneepadCounter = 0;
             cameraMoving = true;
             hourglassTimer = 0;
-        }
+            startDeletion = false;
+}
         //unpauses game when clicking resume
         else if (!died) {
             menuButtons.SetActive(false);
@@ -92,6 +95,7 @@ public class GUIHandler : MonoBehaviour {
             kneepadCounter = 0;
             cameraMoving = true;
             hourglassTimer = 0;
+            startDeletion = false;
         }
     }
 
@@ -101,7 +105,10 @@ public class GUIHandler : MonoBehaviour {
     }
 
     public void loadScores() {
-
+        int[] scores = readScores();
+        for (int i = 0; i < scores.Length; i++) {
+            Debug.Log("Highscore" + (i + 1) + ": " + scores[i]);
+        }
     }
 
     private void showPauseMenu() {
@@ -126,6 +133,7 @@ public class GUIHandler : MonoBehaviour {
         enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Retry";
         Time.timeScale = 0;
         gamePaused = true;
+        writeScore(playerScore);
     }
 
     public void updateScore(int score) {
@@ -137,6 +145,47 @@ public class GUIHandler : MonoBehaviour {
         }
         scoreText.text = ("SCORE: " + playerScore.ToString());
     }
+
+    public void writeScore(int score) {
+        int[] scores = readScores();
+        int ranking = 5;
+
+        //compares player's score to each of the high scores in the array
+        for (int i = 0; i < scores.Length; i++) {
+            if (scores[i] < score) {
+                ranking--;
+            }
+        }
+
+        //shifts scores at/below the player's score down by one rank
+        if (ranking < 5) {
+            for (int i = 4; i > ranking; i--) {
+                scores[i] = scores[i - 1];
+            }
+
+            scores[ranking] = score;
+
+            for (int i = 0; i < scores.Length; i++) {
+                PlayerPrefs.SetInt("Highscore" + (i + 1), scores[i]);
+            }
+        }
+    }
+
+    public int[] readScores() {
+        int[] scores = new int[5];
+        scores[0] = PlayerPrefs.GetInt("Highscore1", 0);
+        scores[1] = PlayerPrefs.GetInt("Highscore2", 0);
+        scores[2] = PlayerPrefs.GetInt("Highscore3", 0);
+        scores[3] = PlayerPrefs.GetInt("Highscore4", 0);
+        scores[4] = PlayerPrefs.GetInt("Highscore5", 0);
+        return scores;
+    } 
+
+    public int getScore(int index) {
+        int[] scores = readScores();
+        return scores[index];
+    }
+
     public void activateMushroomTimer() {
         mushroomGUI.SetActive(true);
         mushroomTimer = 10;
@@ -180,5 +229,13 @@ public class GUIHandler : MonoBehaviour {
         }
 
         hourglassText.text = ": " + (Mathf.Round(hourglassTimer * 100) / 100).ToString();
+    }
+
+    public bool getDeletionStatus() {
+        return startDeletion;
+    }
+
+    public void setDeletionStatus(bool b) {
+        startDeletion = b;
     }
 }

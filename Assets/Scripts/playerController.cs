@@ -158,7 +158,7 @@ public class playerController : MonoBehaviour {
         }
         if (collision.gameObject.CompareTag("Fruit")) {
             Destroy(collision.gameObject);
-            GUIHandler.instance.updateScore(5);
+            GUIHandler.instance.updateScore(25);
         }
         if (collision.gameObject.CompareTag("Item")) {
             itemGrabbed = collision.gameObject.GetComponent<itemData>();
