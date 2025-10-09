@@ -122,6 +122,7 @@ public class playerController : MonoBehaviour {
             foreach (ContactPoint2D contact in collision.contacts) {
                 if (contact.normal.y > 0.5f) {
                     dead = false;
+                    menu.updateScore(10);
                     break;
                 }
             }
@@ -148,6 +149,10 @@ public class playerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("BottomBorder")) {
             menu.uponDeath();
+        }
+        if (collision.gameObject.CompareTag("Fruit")) {
+            Destroy(collision.gameObject);
+            menu.updateScore(5);
         }
     }
     private void OnTriggerExit2D(Collider2D collision) {

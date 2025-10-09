@@ -9,12 +9,9 @@ public class instantiateModule : MonoBehaviour {
     private BoxCollider2D modulePos;
 
     void Start() {
-
     }
 
-
     void Update() {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

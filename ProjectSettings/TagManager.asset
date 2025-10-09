@@ -17,6 +17,7 @@ TagManager:
   - ModuleExit
   - Module
   - Enemy
+  - Fruit
   layers:
   - Default
   - TransparentFX
@@ -68,6 +69,12 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2488853421
+    locked: 0
+  - name: Fruit
+    uniqueID: 1791247003
+    locked: 0
+  - name: FRONT
+    uniqueID: 2868519579
     locked: 0
   m_RenderingLayers:
   - Default
