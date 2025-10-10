@@ -38,6 +38,18 @@ public class playerController : MonoBehaviour {
         movePlayer();
         jump();
         death();
+        //for testing
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            hitPoints = 1000;
+        }
+        if (Input.GetKeyDown(KeyCode.T)) {
+            if(GUIHandler.instance.cameraMoving) {
+                GUIHandler.instance.cameraMoving = false;
+            }
+            else {
+                GUIHandler.instance.cameraMoving = true;
+            }
+        }
     }
 
     private void movePlayer() {
@@ -82,6 +94,12 @@ public class playerController : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !grounded && (rightWalled || leftWalled)) {
             wallJump = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && !grounded && groundsTouching.Count <= 0) {
+            Debug.Log("jump attempted while not grounded, hash set EMPTY");
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && !grounded && groundsTouching.Count > 0) {
+            Debug.Log("jump attempted while not grounded, hash set NOT EMPTY");
         }
     }
 

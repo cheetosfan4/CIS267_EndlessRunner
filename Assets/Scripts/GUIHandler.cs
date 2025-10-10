@@ -24,6 +24,8 @@ public class GUIHandler : MonoBehaviour {
     public GameObject mushroomGUI;
     public GameObject kneepadGUI;
     public GameObject hourglassGUI;
+    public GameObject highscoreGUI;
+    public TextMeshProUGUI highscoreGUIText;
     public float mushroomTimer = 0;
     private TextMeshProUGUI hourglassText;
     private TextMeshProUGUI kneepadText;
@@ -47,12 +49,14 @@ public class GUIHandler : MonoBehaviour {
         mushroomGUI.SetActive(false);
         kneepadGUI.SetActive(false);
         hourglassGUI.SetActive(false);
+        highscoreGUI.SetActive(false);
     }
 
     void Update() {
         showPauseMenu();
     }
 
+    //called when an instance is loaded directly from the gameplay scene
     public void debugMode() {
         GUIHandler.instance.menuButtons.SetActive(false);
         GUIHandler.instance.scoreCounter.SetActive(true);
@@ -106,13 +110,28 @@ public class GUIHandler : MonoBehaviour {
 
     public void loadScores() {
         int[] scores = readScores();
-        for (int i = 0; i < scores.Length; i++) {
+        /*for (int i = 0; i < scores.Length; i++) {
             Debug.Log("Highscore" + (i + 1) + ": " + scores[i]);
-        }
+        }*/
+        highscoreGUI.SetActive(true);
+        highscoreGUIText.text = "1. " + scores[0] + "\n2. " + scores[1] + "\n3. " + scores[2] + "\n4. " + scores[3] + "\n5. " + scores[4];
+    }
+
+    public void closeScores() {
+        highscoreGUI.SetActive(false);
+    }
+
+    public void loadGuide() {
+
+    }
+
+    public void closeGuide() {
+
     }
 
     private void showPauseMenu() {
         if(Input.GetKeyDown(KeyCode.P) && sceneLoaded) {
+            highscoreGUI.SetActive(false);
             if(!gamePaused) {
                 menuButtons.SetActive(true);
                 enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Resume";
