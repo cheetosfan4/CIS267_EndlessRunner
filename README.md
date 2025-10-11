@@ -13,7 +13,7 @@ Press the P key to pause the game.\
 Press the H key to activate or deactivate your HOURGLASS.
 
 ### OBSTACLES
-BRICK WALL: Use your WALL JUMP ability to scale these!
+BRICK WALL: Use your WALL JUMP ability to scale these!\
 CREATURE: Jump on a CREATURE's head to banish them! RUNNING into their side costs a HIT POINT!\
 SPIKE: Try not to RUN into these! Touching one costs a HIT POINT!\
 VOID: Falling into a pit or lagging behind on your RUN will end it INSTANTLY!
