@@ -1,3 +1,8 @@
+//====================================================================================================
+//Author        :       Marc McLennan
+//Date          :       10-12-2025
+//Description   :       CIS267 Homework #1; Endless Runner Game
+//====================================================================================================
 using System;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
@@ -110,7 +115,7 @@ public class playerController : MonoBehaviour {
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (!collision.gameObject.CompareTag("Injure")) {
+        if (collision.gameObject.CompareTag("Terrain") || collision.gameObject.CompareTag("Wall")) {
             //this loops through each of the points of the object that the player collides with
             foreach (ContactPoint2D contact in collision.contacts) {
                 //this essentially checks what angle the surface of the object is when the player lands on it
@@ -163,10 +168,22 @@ public class playerController : MonoBehaviour {
         rightWallsTouching.Remove(collision.collider);
 
         //only sets these to false if the hash sets are empty
-        //this was to fix a bug where the player was unable to jump, most likely due to collisions not registering properly
+        //this was to fix a bug where the player was unable to jump randomly
         grounded = groundsTouching.Count > 0;
         leftWalled = leftWallsTouching.Count > 0;
         rightWalled = rightWallsTouching.Count > 0;
+    }
+
+    //added on collision stay since player was still sometimes getting ungrounded randomly
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Terrain")) {
+            foreach (ContactPoint2D contact in collision.contacts) {
+                if (contact.normal.y > 0.98f) {
+                    groundsTouching.Add(collision.collider);
+                }
+            }
+            grounded = groundsTouching.Count > 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

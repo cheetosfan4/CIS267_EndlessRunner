@@ -1,3 +1,8 @@
+//====================================================================================================
+//Author        :       Marc McLennan
+//Date          :       10-12-2025
+//Description   :       CIS267 Homework #1; Endless Runner Game
+//====================================================================================================
 using System.Data;
 using TMPro;
 using UnityEditor;
@@ -26,6 +31,8 @@ public class GUIHandler : MonoBehaviour {
     public GameObject hourglassGUI;
     public GameObject highscoreGUI;
     public TextMeshProUGUI highscoreGUIText;
+    public GameObject titleGUI;
+    public GameObject guideGUI;
     public float mushroomTimer = 0;
     private TextMeshProUGUI hourglassText;
     private TextMeshProUGUI kneepadText;
@@ -50,6 +57,7 @@ public class GUIHandler : MonoBehaviour {
         kneepadGUI.SetActive(false);
         hourglassGUI.SetActive(false);
         highscoreGUI.SetActive(false);
+        guideGUI.SetActive(false);
     }
 
     void Update() {
@@ -58,14 +66,16 @@ public class GUIHandler : MonoBehaviour {
 
     //called when an instance is loaded directly from the gameplay scene
     public void debugMode() {
-        GUIHandler.instance.menuButtons.SetActive(false);
-        GUIHandler.instance.scoreCounter.SetActive(true);
+        menuButtons.SetActive(false);
+        scoreCounter.SetActive(true);
+        titleGUI.SetActive(false);
         sceneLoaded = true;
     }
 
     public void enterGame() {
         //loads game from main menu
         if(!sceneLoaded) {
+            titleGUI.SetActive(false);
             menuButtons.SetActive(false);
             mushroomGUI.SetActive(false);
             kneepadGUI.SetActive(false);
@@ -122,17 +132,18 @@ public class GUIHandler : MonoBehaviour {
     }
 
     public void loadGuide() {
-
+        guideGUI.SetActive(true);
     }
 
     public void closeGuide() {
-
+        guideGUI.SetActive(false);
     }
 
     private void showPauseMenu() {
         if(Input.GetKeyDown(KeyCode.P) && sceneLoaded) {
             highscoreGUI.SetActive(false);
-            if(!gamePaused) {
+            guideGUI.SetActive(false);
+            if (!gamePaused) {
                 menuButtons.SetActive(true);
                 enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Resume";
                 Time.timeScale = 0;
