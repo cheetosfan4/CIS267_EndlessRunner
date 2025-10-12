@@ -12,8 +12,7 @@ public class objectMover : MonoBehaviour {
     }
 
     void Update() {
-        //pauseAndResume();
-        if (started && GUIHandler.instance.cameraMoving) {
+        if (started && GUIHandler.instance.getCameraMoving()) {
             transform.Translate(Vector2.right * motionSpeed * Time.deltaTime);
         }
         else if (!started) {

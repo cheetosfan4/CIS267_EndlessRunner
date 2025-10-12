@@ -17,11 +17,11 @@ public class mushroomBehavior : MonoBehaviour {
             }
             //if there is an already active mushroom, any new ones will just reset the timer
             else {
-                GUIHandler.instance.mushroomTimer = 10;
+                GUIHandler.instance.setMushroomTimer(10);
                 Destroy(gameObject);
             }
         }
-        if (applied && GUIHandler.instance.mushroomTimer <= 0) {
+        if (applied && GUIHandler.instance.getMushroomTimer() <= 0) {
             player.moveSpeed = Mathf.Abs(player.moveSpeed);
             Destroy(gameObject);
         }

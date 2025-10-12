@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8958698902392322501}
   - component: {fileID: 5521778699805223501}
-  - component: {fileID: 3138552561885113544}
   m_Layer: 0
   m_Name: FRUIT
   m_TagString: Fruit
@@ -80,18 +79,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.16, y: 1.68}
   m_EdgeRadius: 0
---- !u!114 &3138552561885113544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4118937214476012812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760fe0cf4602e8f4f985a42d46522ff0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::fruitController
 --- !u!1 &7352590649848225715
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1791247003
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d72bfc279b3280d489fd1852c724bb04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

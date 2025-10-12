@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class hourglassBehavior : MonoBehaviour {
     private bool applied = false;
-    void Start() {
-    }
 
     void Update() {
-        if (GUIHandler.instance.hourglassTimer > 0 && !applied) {
+        if (GUIHandler.instance.getHourglassTimer() > 0 && !applied) {
             GUIHandler.instance.updateHourglassTimer(1);
             applied = true;
             //if the timer is greater than zero that means the player already has an hourglass
@@ -18,22 +16,22 @@ public class hourglassBehavior : MonoBehaviour {
             GUIHandler.instance.updateHourglassTimer(1);
             applied = true;
         }
-        else if (!GUIHandler.instance.cameraMoving) {
+        else if (!GUIHandler.instance.getCameraMoving()) {
             GUIHandler.instance.updateHourglassTimer();
         }
         checkPress();
-        if (GUIHandler.instance.hourglassTimer <= 0) {
+        if (GUIHandler.instance.getHourglassTimer() <= 0) {
             Destroy(gameObject);
         }
     }
 
     private void checkPress() {
-        if (Input.GetKeyDown(KeyCode.H) && GUIHandler.instance.cameraMoving && GUIHandler.instance.hourglassTimer > 0) {
-            GUIHandler.instance.cameraMoving = false;
+        if (Input.GetKeyDown(KeyCode.H) && GUIHandler.instance.getCameraMoving() && GUIHandler.instance.getHourglassTimer() > 0) {
+            GUIHandler.instance.setCameraMoving(false);
 
         }
-        else if (Input.GetKeyDown(KeyCode.H) && !GUIHandler.instance.cameraMoving) {
-            GUIHandler.instance.cameraMoving = true;
+        else if (Input.GetKeyDown(KeyCode.H) && !GUIHandler.instance.getCameraMoving()) {
+            GUIHandler.instance.setCameraMoving(true);
         }
     }
 }

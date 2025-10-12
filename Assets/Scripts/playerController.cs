@@ -44,7 +44,7 @@ public class playerController : MonoBehaviour {
         jump();
         death();
         //for testing
-        if(Input.GetKeyDown(KeyCode.Z)) {
+        /*if(Input.GetKeyDown(KeyCode.Z)) {
             hitPoints = 1000;
         }
         if (Input.GetKeyDown(KeyCode.T)) {
@@ -54,7 +54,7 @@ public class playerController : MonoBehaviour {
             else {
                 GUIHandler.instance.cameraMoving = true;
             }
-        }
+        }*/
     }
 
     private void movePlayer() {
@@ -100,12 +100,6 @@ public class playerController : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Space) && !grounded && (rightWalled || leftWalled)) {
             wallJump = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && !grounded && groundsTouching.Count <= 0) {
-            Debug.Log("jump attempted while not grounded, hash set EMPTY");
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && !grounded && groundsTouching.Count > 0) {
-            Debug.Log("jump attempted while not grounded, hash set NOT EMPTY");
-        }
     }
 
     private void death() {
@@ -114,6 +108,7 @@ public class playerController : MonoBehaviour {
             dead = false;
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Terrain") || collision.gameObject.CompareTag("Wall")) {
             //this loops through each of the points of the object that the player collides with
@@ -145,7 +140,7 @@ public class playerController : MonoBehaviour {
 
         if (collision.gameObject.CompareTag("Enemy")) {
             bool hit = true;
-            //checks each point to make sure that the player jumped on top of the enemy
+            //checks each point to check if the player jumped on top of the enemy
             foreach (ContactPoint2D contact in collision.contacts) {
                 if (contact.normal.y > 0.5f) {
                     hit = false;
@@ -196,6 +191,8 @@ public class playerController : MonoBehaviour {
             GUIHandler.instance.updateScore(25);
         }
         if (collision.gameObject.CompareTag("Item")) {
+            //each item object has its corresponding accessory linked to its data
+            //gets accessory, sets player as its parent, and transforms it so it fits onto the player sprite
             itemGrabbed = collision.gameObject.GetComponent<itemData>();
             accessoryToSpawn = Instantiate(itemGrabbed.accessory);
             accessoryToSpawn.transform.SetParent(this.gameObject.transform);

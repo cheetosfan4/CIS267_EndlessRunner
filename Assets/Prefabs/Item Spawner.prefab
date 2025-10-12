@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 5540440811546938786, guid: 00a47b3c16bbe274d9cb048e182b2b30, type: 3}
   - {fileID: 1845978619928865564, guid: cf2cee9e985b0074499239ee4a0fe82e, type: 3}
   - {fileID: 2655086022940791636, guid: ecda4242efb450943a658d461d8bca2b, type: 3}
+  fruit: {fileID: 4118937214476012812, guid: f487a559bb142e042a67b5ee89adaa0f, type: 3}
 --- !u!212 &1330913806238660406
 SpriteRenderer:
   m_ObjectHideFlags: 0

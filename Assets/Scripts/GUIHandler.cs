@@ -25,27 +25,30 @@ public class GUIHandler : MonoBehaviour {
 
     public GameObject enterButton;
     public GameObject menuButtons;
-    public GameObject scoreCounter;
-    public GameObject mushroomGUI;
-    public GameObject kneepadGUI;
-    public GameObject hourglassGUI;
-    public GameObject highscoreGUI;
-    public TextMeshProUGUI highscoreGUIText;
     public GameObject titleGUI;
     public GameObject guideGUI;
-    public float mushroomTimer = 0;
-    private TextMeshProUGUI hourglassText;
-    private TextMeshProUGUI kneepadText;
-    private TextMeshProUGUI mushroomText;
+
+    public GameObject scoreCounter;
     private TextMeshProUGUI scoreText;
+    public GameObject mushroomGUI;
+    private TextMeshProUGUI mushroomText;
+    public GameObject kneepadGUI;
+    private TextMeshProUGUI kneepadText;
+    public GameObject hourglassGUI;
+    private TextMeshProUGUI hourglassText;
+    public GameObject highscoreGUI;
+    public TextMeshProUGUI highscoreGUIText;
+
+    private bool cameraMoving = true;
+    private float mushroomTimer = 0;
+    private float hourglassTimer = 0;
     private bool startDeletion = false;
     private bool sceneLoaded = false;
     private bool gamePaused = false;
     private bool died = false;
     private int playerScore = 0;
     private int kneepadCounter = 0;
-    public bool cameraMoving = true;
-    public float hourglassTimer = 0;
+
 
     void Start() {
         DontDestroyOnLoad(this.gameObject);
@@ -120,9 +123,6 @@ public class GUIHandler : MonoBehaviour {
 
     public void loadScores() {
         int[] scores = readScores();
-        /*for (int i = 0; i < scores.Length; i++) {
-            Debug.Log("Highscore" + (i + 1) + ": " + scores[i]);
-        }*/
         highscoreGUI.SetActive(true);
         highscoreGUIText.text = "1. " + scores[0] + "\n2. " + scores[1] + "\n3. " + scores[2] + "\n4. " + scores[3] + "\n5. " + scores[4];
     }
@@ -187,9 +187,10 @@ public class GUIHandler : MonoBehaviour {
             }
         }
 
-        //shifts scores at/below the player's score down by one rank
+        //inserts new score into rankings
         if (ranking < 5) {
             for (int i = 4; i > ranking; i--) {
+                //sets current rank to the score above it
                 scores[i] = scores[i - 1];
             }
 
@@ -235,7 +236,7 @@ public class GUIHandler : MonoBehaviour {
         kneepadCounter += x;
         if (kneepadCounter > 0) {
             kneepadGUI.SetActive(true);
-            kneepadText.text = "X " + (Mathf.Round(hourglassTimer * 100) / 100).ToString();
+            kneepadText.text = "X " + kneepadCounter.ToString();
         }
         else {
             kneepadGUI.SetActive(false);
@@ -261,11 +262,31 @@ public class GUIHandler : MonoBehaviour {
         hourglassText.text = ": " + (Mathf.Round(hourglassTimer * 100) / 100).ToString();
     }
 
+    //--getters----------------------------------------
     public bool getDeletionStatus() {
         return startDeletion;
     }
+    public bool getCameraMoving() {
+        return cameraMoving;
+    }
+    public float getMushroomTimer() {
+        return mushroomTimer;
+    }
+    public float getHourglassTimer() {
+        return hourglassTimer;
+    }
 
+    //--setters----------------------------------------
     public void setDeletionStatus(bool b) {
         startDeletion = b;
+    }
+    public void setCameraMoving(bool b) {
+        cameraMoving = b;
+    }
+    public void setMushroomTimer(float f) {
+        mushroomTimer = f;
+    }
+    public void setHourglassTimer(float f) {
+        hourglassTimer = f;
     }
 }

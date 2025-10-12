@@ -459,6 +459,9 @@ MonoBehaviour:
   - {fileID: 8933446907932849426, guid: 96f7581fd4ea7f843abaadbf7fa59ea5, type: 3}
   - {fileID: 2089188845268355544, guid: 065bfd446a43660428bd4ba855f2b15a, type: 3}
   - {fileID: 2220327668416025525, guid: 125effea76e097c409f83b163fcc3725, type: 3}
+  - {fileID: 2220327668416025525, guid: f0ca43b37dcd0f4418ccb7cb0c4496fc, type: 3}
+  - {fileID: 2220327668416025525, guid: d6b2997ca76dbec4a8aec45dba69f8bd, type: 3}
+  - {fileID: 2220327668416025525, guid: 041bb706c108b0a4fa47984f55003c87, type: 3}
 --- !u!50 &408712109
 Rigidbody2D:
   serializedVersion: 5
@@ -942,7 +945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31bbe9665a57bd748b0ffc2b72af3964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::playerController
-  moveSpeed: 16
+  moveSpeed: 18
   jumpForce: 30
   wallJumpShootDuration: 0.2
   hitPoints: 1
@@ -1382,7 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79219da895c71bd4997dc25537fe522e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::objectMover
-  motionSpeed: 8.5
+  motionSpeed: 9.2
   player: {fileID: 811250140}
 --- !u!4 &1379947939
 Transform:
