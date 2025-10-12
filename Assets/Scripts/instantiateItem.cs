@@ -10,13 +10,13 @@ public class instantiateItem : MonoBehaviour {
     void Start() {
         randomItem = Random.Range(0, items.Length);
         fruitChance = Random.Range(0, 10);
-        //30% chance to spawn a fruit instead of an item, to make items rarer
-        if (fruitChance <= 6) {
+        //20% chance to spawn a fruit instead of an item, to make items rarer
+        if (fruitChance <= 7) {
             objectToSpawn = Instantiate(items[randomItem]);
             objectToSpawn.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
             Destroy(gameObject);
         }
-        else if (fruitChance >= 7) {
+        else if (fruitChance >= 8) {
             objectToSpawn = Instantiate(fruit);
             objectToSpawn.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
             Destroy(gameObject);

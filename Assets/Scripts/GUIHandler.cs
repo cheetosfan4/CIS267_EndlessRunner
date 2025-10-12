@@ -89,6 +89,7 @@ public class GUIHandler : MonoBehaviour {
             sceneLoaded = true;
             Time.timeScale = 1;
             updateScore(0);
+            died = false;
             kneepadCounter = 0;
             cameraMoving = true;
             hourglassTimer = 0;
@@ -133,6 +134,7 @@ public class GUIHandler : MonoBehaviour {
             cameraMoving = true;
             hourglassTimer = 0;
             startDeletion = false;
+            died = false;
             sceneLoaded = false;
             exitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Quit";
             enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
