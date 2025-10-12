@@ -119,22 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &145634518 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2671323310468055857, guid: db7a307464187054a903a44cbcea9e36, type: 3}
-  m_PrefabInstance: {fileID: 2180418575585297676}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &747282599 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1317537085174987264, guid: db7a307464187054a903a44cbcea9e36, type: 3}
-  m_PrefabInstance: {fileID: 2180418575585297676}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1175720992
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,14 +259,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2768790716723558002, guid: db7a307464187054a903a44cbcea9e36, type: 3}
-      propertyPath: highscoreGUI
-      value: 
-      objectReference: {fileID: 145634518}
-    - target: {fileID: 2768790716723558002, guid: db7a307464187054a903a44cbcea9e36, type: 3}
-      propertyPath: highscoreGUIText
-      value: 
-      objectReference: {fileID: 747282599}
     - target: {fileID: 6227959506447569744, guid: db7a307464187054a903a44cbcea9e36, type: 3}
       propertyPath: m_Name
       value: GUIHandler

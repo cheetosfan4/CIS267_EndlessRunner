@@ -24,6 +24,7 @@ public class GUIHandler : MonoBehaviour {
     }
 
     public GameObject enterButton;
+    public GameObject exitButton;
     public GameObject menuButtons;
     public GameObject titleGUI;
     public GameObject guideGUI;
@@ -86,10 +87,12 @@ public class GUIHandler : MonoBehaviour {
             scoreCounter.SetActive(true);
             SceneManager.LoadScene("SampleScene");
             sceneLoaded = true;
+            Time.timeScale = 1;
             updateScore(0);
             kneepadCounter = 0;
             cameraMoving = true;
             hourglassTimer = 0;
+            mushroomTimer = 0;
             startDeletion = false;
 }
         //unpauses game when clicking resume
@@ -112,13 +115,33 @@ public class GUIHandler : MonoBehaviour {
             kneepadCounter = 0;
             cameraMoving = true;
             hourglassTimer = 0;
+            mushroomTimer = 0;
             startDeletion = false;
         }
     }
 
     public void exitGame() {
-        //only works on exported build
-        Application.Quit();
+        if (sceneLoaded) {
+            titleGUI.SetActive(true);
+            menuButtons.SetActive(true);
+            mushroomGUI.SetActive(false);
+            kneepadGUI.SetActive(false);
+            hourglassGUI.SetActive(false);
+            scoreCounter.SetActive(false);
+            updateScore(0);
+            kneepadCounter = 0;
+            cameraMoving = true;
+            hourglassTimer = 0;
+            startDeletion = false;
+            sceneLoaded = false;
+            exitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Quit";
+            enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play";
+            SceneManager.LoadScene("Main Menu");
+        }
+        else {
+            //only works on exported build
+            Application.Quit();
+        }
     }
 
     public void loadScores() {
@@ -146,6 +169,7 @@ public class GUIHandler : MonoBehaviour {
             if (!gamePaused) {
                 menuButtons.SetActive(true);
                 enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Resume";
+                exitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
                 Time.timeScale = 0;
                 gamePaused = true;
             }
@@ -161,6 +185,7 @@ public class GUIHandler : MonoBehaviour {
         died = true;
         menuButtons.SetActive(true);
         enterButton.GetComponentInChildren<TextMeshProUGUI>().text = "Retry";
+        exitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
         Time.timeScale = 0;
         gamePaused = true;
         writeScore(playerScore);

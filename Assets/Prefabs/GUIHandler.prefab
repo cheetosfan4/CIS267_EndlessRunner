@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4287614964919181462
 CanvasRenderer:
@@ -1133,7 +1133,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &422305620643255704
 CanvasRenderer:
@@ -2986,7 +2986,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5464480171171907130
 CanvasRenderer:
@@ -3415,18 +3415,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GUIHandler
   enterButton: {fileID: 5707806140070936731}
+  exitButton: {fileID: 6625862607659615535}
   menuButtons: {fileID: 3623714496132311766}
+  titleGUI: {fileID: 3380626391711388811}
+  guideGUI: {fileID: 6410281781466548444}
   scoreCounter: {fileID: 7627317875566187157}
   mushroomGUI: {fileID: 1714563742837020740}
   kneepadGUI: {fileID: 5424280562325567644}
   hourglassGUI: {fileID: 3369293772553919997}
   highscoreGUI: {fileID: 2671323310468055857}
   highscoreGUIText: {fileID: 1317537085174987264}
-  titleGUI: {fileID: 3380626391711388811}
-  guideGUI: {fileID: 6410281781466548444}
-  mushroomTimer: 0
-  cameraMoving: 1
-  hourglassTimer: 0
 --- !u!1 &6410281781466548444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3857,7 +3855,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6744074620201128834
 CanvasRenderer:
@@ -5250,7 +5248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2298072782202708730, guid: 44778d0783772034a9445752afc71bdb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44778d0783772034a9445752afc71bdb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
