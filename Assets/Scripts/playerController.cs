@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class playerController : MonoBehaviour {
     public float moveSpeed;
